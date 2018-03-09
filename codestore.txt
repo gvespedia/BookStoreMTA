@@ -1,0 +1,21 @@
+      requires:
+      - name: tinyjs_api
+        group: destinations
+        properties:
+          name: booksjs_be
+          url: '~{service_url}'
+  - name: booksdb
+    type: hdb
+    path: booksdb
+    requires:
+      - name: bookstore_db
+  - name: booksjs
+    type: nodejs
+    path: booksjs
+    requires:
+      - name: booksdb
+      - name: bookstore_db
+    provides:
+      - name: tinyjs_api
+        properties:
+          service_url: '${default-url}'
